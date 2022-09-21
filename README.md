@@ -43,6 +43,11 @@ And then to `tsconfig.json`, add the following line:
 }
 ```
 
+## Jest
+
+If publishing for a web app, you may need the `jsdom` `testEnvironment` in the `jest.config.js`
+See https://jestjs.io/docs/configuration#testenvironment-string
+
 ## Publishing
 
 Just run `npm publish`, which should build the package with rollup, increment the version, and publish the results.

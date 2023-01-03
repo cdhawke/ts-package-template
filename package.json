@@ -11,6 +11,7 @@
   ],
   "scripts": {
     "build": "rollup -c",
+    "format": "prettier --write 'src/**/*'",
     "build-production": "PRODUCTION=true npm run build",
     "lint": "eslint --fix 'src/**/*.ts'",
     "test": "jest",

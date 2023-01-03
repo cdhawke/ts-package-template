@@ -15,5 +15,11 @@
     "emitDeclarationOnly": true
   },
   "include": ["src/**/*"],
-  "exclude": ["node_modules", "dist", "types", "src/**/*.test.ts"]
+  "exclude": [
+    "node_modules",
+    "dist",
+    "types",
+    "src/**/*.test.ts",
+    "scripts/bin.js"
+  ]
 }

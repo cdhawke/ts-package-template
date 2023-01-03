@@ -11,7 +11,7 @@ Replace all instances of `ts-package-template` with the name of your actual npm 
 Run the following:
 
 ```sh
-npm i -D eslint-plugin-react-hooks eslint-plugin-react @types/react @testing-library/react-hooks @testing-library/react
+yarn add -D eslint-plugin-react-hooks eslint-plugin-react @types/react @testing-library/react-hooks @testing-library/react
 ```
 
 Replace the following sections in `.eslintrc.json`:

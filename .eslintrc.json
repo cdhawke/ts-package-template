@@ -11,5 +11,12 @@
     "sourceType": "module"
   },
   "plugins": ["@typescript-eslint"],
-  "rules": {}
+  "rules": { "@typescript-eslint/ban-ts-comment": "off" },
+  "ignorePatterns": [
+    "node_modules",
+    "dist",
+    "types",
+    "src/**/*.test.ts",
+    "bin.js"
+  ]
 }

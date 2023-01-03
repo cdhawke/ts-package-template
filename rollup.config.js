@@ -6,6 +6,15 @@ import external from 'rollup-plugin-peer-deps-external';
 import dts from 'rollup-plugin-dts';
 import * as packageJson from './package.json';
 
+const banner = `
+  /**
+   * @license
+   * author: ${packageJson.author}
+   * ${packageJson.name.replace(/^@.*\//, '')}.js v${packageJson.version}
+   * Released under the ${packageJson.license} license.
+   */
+`;
+
 export default [
   {
     input: 'src/index.ts',
@@ -13,21 +22,23 @@ export default [
       {
         file: packageJson.main,
         format: 'cjs',
-        sourcemap: true,
+        sourcemap: false,
         name: 'ts-package-template',
+        banner,
         exports: 'named',
       },
       {
         file: packageJson.module,
         format: 'esm',
-        sourcemap: true,
+        banner,
+        sourcemap: false,
       },
     ],
     plugins: [
       external(),
       resolve(),
       commonjs(),
-      typescript({ tsconfig: './tsconfig.json' }),
+      typescript({ tsconfig: './tsconfig.json', sourceMap: false }),
       terser(),
     ],
   },

@@ -1,7 +1,6 @@
+import packageTemplateFunction, { TsPackageTemplateProps } from '..';
 
-import packageTemplateFunction, { TsPackageTemplateProps } from '.';
-
-const props: TsPackageTemplateProps = {input: 1, multiplicand: 2}
+const props: TsPackageTemplateProps = { input: 1, multiplicand: 2 };
 
 describe('TS Package Template', () => {
   it('succeeds', () => {

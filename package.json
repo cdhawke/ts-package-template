@@ -10,7 +10,7 @@
   ],
   "scripts": {
     "build": "rollup -c",
-    "lint": "eslint src",
+    "lint": "eslint --fix 'src/**/*.ts'",
     "test": "jest",
     "prepare": "husky install",
     "prepublishOnly": "npm run build && npm version patch"

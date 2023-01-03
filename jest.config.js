@@ -2,4 +2,5 @@
 module.exports = {
   preset: 'ts-jest',
   setupFiles: ['./jest.setup.js'],
+  testMatch: ['**/__tests__/**/*.test.ts'],
 };

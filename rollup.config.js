@@ -15,6 +15,8 @@ const banner = `
    */
 `;
 
+const production = !!process.env.PRODUCTION;
+
 export default [
   {
     input: 'src/index.ts',
@@ -22,7 +24,7 @@ export default [
       {
         file: packageJson.main,
         format: 'cjs',
-        sourcemap: false,
+        sourcemap: production,
         name: 'ts-package-template',
         banner,
         exports: 'named',
@@ -31,15 +33,18 @@ export default [
         file: packageJson.module,
         format: 'esm',
         banner,
-        sourcemap: false,
+        sourcemap: production,
       },
     ],
     plugins: [
       external(),
       resolve(),
       commonjs(),
-      typescript({ tsconfig: './tsconfig.json', sourceMap: false }),
-      terser(),
+      typescript({
+        tsconfig: './tsconfig.json',
+        sourceMap: production,
+      }),
+      process.env.PRODUCTION && terser(),
     ],
   },
   {

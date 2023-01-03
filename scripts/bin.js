@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 const { execSync } = require('child_process');
+const fs = require('fs');
 const runCommand = (command) => {
   try {
     execSync(`${command}`, { stdio: 'inherit' });
@@ -20,15 +21,62 @@ if (!checkedOut) {
   process.exit(-1);
 }
 
-console.log('Installing Dependencies...');
+console.log('Installing common dependencies...');
 const depsInstalled = runCommand(installDeps);
 if (!depsInstalled) {
   process.exit(-1);
 }
 
-// if (yargs.argv.react) {
-//   console.log('Installing React dependencies');
-//   exec(
-//     'yarn add -D eslint-plugin-react-hooks eslint-plugin-react @types/react @testing-library/react-hooks @testing-library/react'
-//   );
-// }
+console.log('Removing unnecessary files...');
+runCommand(`rm -rf ${repo}/.git`);
+runCommand(`rm -rf ${repo}/scripts`);
+
+console.log(
+  'Replacing all instances of "ts-package-template" with the new package name...'
+);
+runCommand(
+  `LC_ALL=C find ${repo} -type f -exec sed -i '' 's/ts-package-template/${repo}/g' {} +`
+);
+
+const react = process.argv.includes('--react');
+
+if (react) {
+  console.log('Installing React dependencies');
+  const reactDeps = runCommand(
+    'yarn add -D eslint-plugin-react-hooks eslint-plugin-react @types/react @testing-library/react-hooks @testing-library/react'
+  );
+  if (!reactDeps) {
+    process.exit(-1);
+  }
+
+  const tsconfig = JSON.parse(fs.readFileSync(`${repo}/tsconfig.json`));
+  const eslintrc = JSON.parse(fs.readFileSync(`${repo}/.eslintrc.json`));
+  console.log('Configuring tsconfig.json for React');
+  tsconfig.compilerOptions.jsx = 'react';
+  fs.writeFileSync(`${repo}/tsconfig.json`, JSON.stringify(tsconfig, null, 2));
+
+  console.log('Configuring eslint for React');
+  eslintrc.plugins.push('react');
+  eslintrc.parserOptions.ecmaFeatures = {
+    jsx: true,
+  };
+  eslintrc.extends.push('plugin:react/jsx-runtime');
+  eslintrc.extends.push('plugin:react-hooks/recommended');
+  fs.writeFileSync(`${repo}/.eslintrc.json`, JSON.stringify(eslintrc, null, 2));
+}
+
+console.log('Formatting files...');
+const formatted = runCommand(
+  `cd ${repo} && yarn run prettier --write "./**/*.{ts,js,json}"`
+);
+if (!formatted) {
+  process.exit(-1);
+}
+
+console.log('Initializing git...');
+const git = runCommand(`cd ${repo} && git init`);
+if (!git) {
+  process.exit(-1);
+}
+
+console.log('Done!');

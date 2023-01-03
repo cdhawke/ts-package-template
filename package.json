@@ -15,10 +15,7 @@
     "prepare": "husky install",
     "prepublishOnly": "npm run build && npm version patch"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/cdhawke/ts-package-template.git"
-  },
+  "repository": "git+https://github.com/cdhawke/ts-package-template.git",
   "keywords": [
     "typescript",
     "template",

@@ -1,6 +1,6 @@
 {
   "name": "create-ts-package-template",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Typescript template for creating and publishing with rollup, typescript, jest, eslint, prettier, and husky",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",

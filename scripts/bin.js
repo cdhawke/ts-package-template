@@ -39,7 +39,7 @@ runCommand(
 
 console.log('Replacing readme...');
 runCommand(`rm ${repo}/README.md`);
-runCommand(`mv ${repo}scripts/README_template.md ${repo}/README.md`);
+runCommand(`mv ${repo}/scripts/README_template.md ${repo}/README.md`);
 
 console.log('Removing unnecessary files...');
 runCommand(`rm -rf ${repo}/.git`);

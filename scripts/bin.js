@@ -27,16 +27,23 @@ if (!depsInstalled) {
   process.exit(-1);
 }
 
-console.log('Removing unnecessary files...');
-runCommand(`rm -rf ${repo}/.git`);
-runCommand(`rm -rf ${repo}/scripts`);
-
 console.log(
   'Replacing all instances of "ts-package-template" with the new package name...'
 );
 runCommand(
   `LC_ALL=C find ${repo} -type f -exec sed -i '' 's/ts-package-template/${repo}/g' {} +`
 );
+runCommand(
+  `LC_ALL=C find ${repo} -type f -exec sed -i '' 's/create-ts-package-template/${repo}/g' {} +`
+);
+
+console.log('Replacing readme...');
+runCommand(`rm ${repo}/README.md`);
+runCommand(`mv ${repo}scripts/README_template.md ${repo}/README.md`);
+
+console.log('Removing unnecessary files...');
+runCommand(`rm -rf ${repo}/.git`);
+runCommand(`rm -rf ${repo}/scripts`);
 
 const react = process.argv.includes('--react');
 

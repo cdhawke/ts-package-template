@@ -12,11 +12,11 @@
   "scripts": {
     "build": "rollup -c",
     "format": "prettier --write 'src/**/*'",
-    "build-production": "PRODUCTION=true npm run build",
+    "build-production": "PRODUCTION=true yarn run build",
     "lint": "eslint --fix 'src/**/*.ts'",
     "test": "jest",
     "prepare": "husky install",
-    "prepublishOnly": "npm run build-production && npm version patch"
+    "prepublishOnly": "yarn run build-production"
   },
   "repository": "git+https://github.com/cdhawke/ts-package-template.git",
   "keywords": [

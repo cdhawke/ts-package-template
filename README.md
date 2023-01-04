@@ -1,4 +1,4 @@
-# ts-package-template
+# create-ts-package-template
 
 Typescript template for creating and publishing with rollup, typescript, jest, eslint, prettier, and husky
 
@@ -42,4 +42,8 @@ See https://jestjs.io/docs/configuration#testenvironment-string
 
 ## Publishing
 
-Just run `npm publish`, which should build the package with rollup, increment the version, and publish the results.
+```sh
+yarn publish
+```
+
+This should build the package with rollup, use the specified version, and publish the results.

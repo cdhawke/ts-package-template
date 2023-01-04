@@ -16,3 +16,30 @@ To add React linting and compatibility for publishing things like components, yo
 ```sh
 npx create-ts-package-template package-name --react
 ```
+
+You can then `cd` into the `package-name` directory and `build`, `test` or `publish`
+
+## Building
+
+```sh
+yarn build
+```
+
+Or, to minify and remove source maps:
+
+```sh
+yarn build-production
+```
+
+## Testing
+
+```sh
+yarn test
+```
+
+Note: If publishing for a web app, you may need the `jsdom` `testEnvironment` in the `jest.config.js`
+See https://jestjs.io/docs/configuration#testenvironment-string
+
+## Publishing
+
+Just run `npm publish`, which should build the package with rollup, increment the version, and publish the results.

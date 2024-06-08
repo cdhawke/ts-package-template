@@ -5,7 +5,9 @@
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "types": "dist/index.d.ts",
-  "bin": "scripts/bin.js",
+  "bin": {
+    "create-ts-package-template": "scripts/bin.js"
+  },
   "files": [
     "scripts/**/*",
     "dist/**/*"
@@ -19,7 +21,10 @@
     "prepare": "husky install",
     "prepublishOnly": "yarn run build-production"
   },
-  "repository": "git+https://github.com/cdhawke/ts-package-template.git",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cdhawke/ts-package-template.git"
+  },
   "keywords": [
     "typescript",
     "template",
